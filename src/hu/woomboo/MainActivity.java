@@ -4,9 +4,7 @@ import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,16 +39,18 @@ public class MainActivity extends ActionBarActivity {
 
 
 	private void setupPlayButtons() {
-		ImageButton play = (ImageButton) findViewById(R.id.btnPlay);
+		final ImageButton play = (ImageButton) findViewById(R.id.btnPlay);
 		play.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View view) {
 				if (mp.isPlaying()) {
 					mp.pause();
+					play.setImageDrawable(getResources().getDrawable(R.drawable.play_button));
 				}
 				else {
 					mp.start();
+					play.setImageDrawable(getResources().getDrawable(R.drawable.pause_button));
 				}
 			}
 		});
@@ -72,6 +72,9 @@ public class MainActivity extends ActionBarActivity {
 					mp.setDataSource(afd.getFileDescriptor());
 					mp.prepare();
 					trackInfo.refresh(track);
+					Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+					startActivity(intent); 
 				}
 				catch (Exception e) {
 					e.printStackTrace();

@@ -29,7 +29,6 @@ public class AboutActivity extends ActionBarActivity {
 		switch (item.getItemId()) {
 			case R.id.action_back:
 				backAction();
-
 			default:
 				return super.onOptionsItemSelected(item);
 		}

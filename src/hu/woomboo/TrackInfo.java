@@ -2,6 +2,8 @@ package hu.woomboo;
 
 import android.content.Context;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 public class TrackInfo {
@@ -12,6 +14,9 @@ public class TrackInfo {
 	private TextView title;
 	private TextView full;
 	private TextView year;
+	private SeekBar seekBar;
+	private TextView currentTime;
+	private TextView fullTime;
 
 	public TrackInfo(Context context, ViewGroup layout) {
 		this.context = context;
@@ -28,6 +33,16 @@ public class TrackInfo {
 		layout.addView(full);
 		year = new TextView(context);
 		layout.addView(year);
+		
+		LinearLayout bottomLayout = new LinearLayout(context);
+		bottomLayout.setOrientation(LinearLayout.HORIZONTAL);
+		currentTime = new TextView(context);
+		fullTime = new TextView(context);
+		seekBar = new SeekBar(context);
+		bottomLayout.addView(currentTime);
+		bottomLayout.addView(seekBar);
+		bottomLayout.addView(fullTime);
+		layout.addView(bottomLayout);
 	}
 	
 	public void refresh(Track track) {
