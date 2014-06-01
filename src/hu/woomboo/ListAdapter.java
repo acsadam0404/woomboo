@@ -11,11 +11,11 @@ import android.widget.SimpleAdapter;
 
 
 public class ListAdapter extends SimpleAdapter {
-	private final static List<HashMap<String, String>> trackItems = new ArrayList<HashMap<String, String>>();
-	private final static Map<Integer, Track> tracks = new HashMap<Integer, Track>();
 	private static final String NO = "no";
 	private static final String NAME = "name";
 	private static final String LENGTH = "length";
+	private final static List<HashMap<String, String>> trackItems = new ArrayList<HashMap<String, String>>();
+	private static Map<Integer, Track> tracks = new HashMap<Integer, Track>();
 
 
 	public ListAdapter(Context context) {
@@ -24,30 +24,12 @@ public class ListAdapter extends SimpleAdapter {
 
 
 	private static List<? extends Map<String, ?>> createList() {
-		Scanner sc = null;
-		try {
-			sc = new Scanner(ListAdapter.class.getResourceAsStream("tracks.txt"));
-			while (sc.hasNext()) {
-				String line = sc.nextLine();
-				String[] split = line.split(";");
-				Track track = new Track();
-				track.setNo(split[0]);
-				track.setName(split[1]);
-				track.setLength(split[2]);
-				track.setAudio(split[3]);
-				tracks.put(Integer.parseInt(track.getNo()), track);
-			}
-		}
-		finally {
-			if (sc != null) {
-				sc.close();
-			}
-		}
+		tracks = new TrackReader("tracks.txt").read();
 
 		for (Track t : tracks.values()) {
 			HashMap<String, String> temp = new HashMap<String, String>();
 			temp.put(NO, t.getNo());
-			temp.put(NAME, t.getName());
+			temp.put(NAME, t.getTitle());
 			temp.put(LENGTH, t.getLength());
 			trackItems.add(temp);
 		}

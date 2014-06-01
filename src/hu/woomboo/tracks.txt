@@ -1,2 +1,2 @@
-1;Első track;12:11;m1
-2;Második track;15:12;m2
+1;Gubányi György István;Az ébenfa ló;2007;22:10;m1
+2;Gubányi György István;Sahriár király és Sehrezád;2007;9:52;m2
