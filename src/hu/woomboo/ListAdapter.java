@@ -20,7 +20,7 @@ public class ListAdapter {
 	private static Map<Integer, Track> tracks = new HashMap<Integer, Track>();
 	private SimpleAdapter adapter;
 
-
+ 
 	public ListAdapter(Context context) {
 		adapter = new SimpleAdapter(context, createList(), R.layout.track, new String[] { NO, NAME, LENGTH }, new int[] { R.id.trackNo, R.id.trackName, R.id.trackLength });
 	}
