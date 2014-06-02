@@ -3,7 +3,6 @@ package hu.woomboo;
 import android.app.Activity;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 
 public class TrackInfo implements OnSeekBarChangeListener {
 	private Track track;
-	private ViewGroup layout;
-	private Activity context;
 	private TextView author;
 	private TextView title;
 	private TextView full;
@@ -26,7 +23,6 @@ public class TrackInfo implements OnSeekBarChangeListener {
 
 
 	public TrackInfo(Activity context, MediaPlayer mp) {
-		this.context = context;
 		this.mp = mp;
 
 		author = (TextView) context.findViewById(R.id.author);
@@ -37,7 +33,6 @@ public class TrackInfo implements OnSeekBarChangeListener {
 		fullTime = (TextView) context.findViewById(R.id.fullTime);
 		seekBar = (SeekBar) context.findViewById(R.id.seekBar);
 		seekBar.setOnSeekBarChangeListener(this);
-
 	}
 
 
@@ -46,10 +41,7 @@ public class TrackInfo implements OnSeekBarChangeListener {
 		author.setText(track.getAuthor());
 		title.setText(track.getTitle());
 		year.setText(track.getYear());
-		/* TODO mi az a hosszú? */
-		full.setText("TEST");
-		currentTime.setText("10:22");
-		fullTime.setText("10:43");
+		full.setText(track.getExtra());
 	}
 
 	private Runnable mUpdateTimeTask = new Runnable() {

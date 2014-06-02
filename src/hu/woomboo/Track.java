@@ -7,42 +7,79 @@ public class Track {
 	private String year;
 	private String length;
 	private String audio;
+	private String extra;
+
+
+	public String getExtra() {
+		return extra;
+	}
+
+
+	public void setExtra(String extra) {
+		this.extra = extra;
+	}
+
+
 	public String getNo() {
 		return no;
 	}
+
+
 	public void setNo(String no) {
 		this.no = no;
 	}
+
+
 	public String getAuthor() {
 		return author;
 	}
+
+
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+
 	public String getTitle() {
 		return title;
 	}
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+
 	public String getYear() {
 		return year;
 	}
+
+
 	public void setYear(String year) {
 		this.year = year;
 	}
+
+
 	public String getLength() {
 		return length;
 	}
+
+
 	public void setLength(String length) {
 		this.length = length;
 	}
+
+
 	public String getAudio() {
 		return audio;
 	}
+
+
 	public void setAudio(String audio) {
 		this.audio = audio;
 	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,6 +92,8 @@ public class Track {
 		result = prime * result + ((year == null) ? 0 : year.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -102,7 +141,5 @@ public class Track {
 			return false;
 		return true;
 	}
-	
-	
 
 }

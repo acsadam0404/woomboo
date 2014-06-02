@@ -23,10 +23,11 @@ public class TrackReader {
 				Track track = new Track();
 				track.setNo(split[0]);
 				track.setAuthor(split[1]);
-				track.setTitle(split[2]);
-				track.setYear(split[3]);
-				track.setLength(split[4]);
-				track.setAudio(split[5]);
+				track.setExtra(split[2]);
+				track.setTitle(split[3]);
+				track.setYear(split[4]);
+				track.setLength(split[5]);
+				track.setAudio(split[6]);
 				tracks.put(Integer.parseInt(track.getNo()), track);
 			}
 		}

@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
@@ -21,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
 	private static final String TAG = "MainActivity";
 	private MediaPlayer mp = new MediaPlayer();
 	private TrackInfo trackInfo;
+	private ListAdapter adapter;
 
 
 	@Override
@@ -29,9 +29,10 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 
 		trackInfo = new TrackInfo(this, mp);
+		adapter = new ListAdapter(this);
 		createTracksView();
 		setupPlayButtons();
-		setupMedia(ListAdapter.getTrack(1));
+		setupMedia(adapter.getTrack(1));
 	}
 
 
@@ -94,11 +95,11 @@ public class MainActivity extends ActionBarActivity {
 
 	private void createTracksView() {
 		ListView lv = (ListView) findViewById(R.id.tracks);
-		lv.setAdapter(new ListAdapter(this));
+		lv.setAdapter(adapter.getAdapter());
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				setupMedia(ListAdapter.getTrack(position + 1));
+				setupMedia(adapter.getTrack(position + 1));
 				Intent intent = new Intent(MainActivity.this, ImageActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				startActivity(intent);
