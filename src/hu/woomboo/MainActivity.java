@@ -5,6 +5,7 @@ import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 
 
 public class MainActivity extends ActionBarActivity {
+	private static final String TAG = "MainActivity";
 	private MediaPlayer mp = new MediaPlayer();
 	private TrackInfo trackInfo;
 
@@ -26,34 +28,67 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		createTrackInfo();
+		trackInfo = new TrackInfo(this, mp);
 		createTracksView();
 		setupPlayButtons();
-	}
-
-
-	private void createTrackInfo() {
-		trackInfo = new TrackInfo(this, (ViewGroup) findViewById(R.id.trackInfo));
-		trackInfo.build();
+		setupMedia(ListAdapter.getTrack(1));
 	}
 
 
 	private void setupPlayButtons() {
 		final ImageButton play = (ImageButton) findViewById(R.id.btnPlay);
 		play.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View view) {
 				if (mp.isPlaying()) {
 					mp.pause();
-					play.setImageDrawable(getResources().getDrawable(R.drawable.play_button));
 				}
 				else {
 					mp.start();
-					play.setImageDrawable(getResources().getDrawable(R.drawable.pause_button));
+				}
+				refreshPlayButton(mp.isPlaying());
+			}
+		});
+
+		final ImageButton prev = (ImageButton) findViewById(R.id.btnPrev);
+		prev.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mp.isPlaying()) {
+					int seekTo = mp.getCurrentPosition() - 5000;
+					if (seekTo > 0) {
+						mp.seekTo(seekTo);
+					}
+
 				}
 			}
 		});
+
+		final ImageButton next = (ImageButton) findViewById(R.id.btnNext);
+		next.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (mp.isPlaying()) {
+					int seekTo = mp.getCurrentPosition() + 5000;
+					if (seekTo < mp.getDuration()) {
+						mp.seekTo(seekTo);
+					}
+				}
+			}
+		});
+	}
+
+
+	private void refreshPlayButton(boolean playing) {
+		final ImageButton play = (ImageButton) findViewById(R.id.btnPlay);
+		if (playing) {
+			play.setImageDrawable(getResources().getDrawable(R.drawable.pause_button));
+		}
+		else {
+			play.setImageDrawable(getResources().getDrawable(R.drawable.play_button));
+		}
 	}
 
 
@@ -63,26 +98,32 @@ public class MainActivity extends ActionBarActivity {
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Track track = ListAdapter.getTrack(position + 1);
-
-				int audioResourceId = getResources().getIdentifier(track.getAudio(), "raw", getPackageName());
-				AssetFileDescriptor afd = getResources().openRawResourceFd(audioResourceId);
-				try {
-					mp.reset();
-					mp.setDataSource(afd.getFileDescriptor());
-					mp.prepare();
-					trackInfo.refresh(track);
-					Intent intent = new Intent(MainActivity.this, ImageActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-					startActivity(intent); 
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
+				setupMedia(ListAdapter.getTrack(position + 1));
+				Intent intent = new Intent(MainActivity.this, ImageActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				startActivity(intent);
+				mp.start();
+				trackInfo.onPlay();
+				refreshPlayButton(true);
 			}
+
 		});
 	}
-	
+
+
+	private void setupMedia(Track track) {
+		int audioResourceId = getResources().getIdentifier(track.getAudio(), "raw", getPackageName());
+		AssetFileDescriptor afd = getResources().openRawResourceFd(audioResourceId);
+		try {
+			mp.reset();
+			mp.setDataSource(afd.getFileDescriptor());
+			mp.prepare();
+			trackInfo.refresh(track);
+		}
+		catch (Exception e) {
+			Log.e(TAG, e.toString());
+		}
+	}
 
 
 	@Override
@@ -109,6 +150,5 @@ public class MainActivity extends ActionBarActivity {
 		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		startActivity(intent);
 	}
-
 
 }

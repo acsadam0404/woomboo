@@ -993,8 +993,8 @@ containing a value of this type.
     }
     public static final class id {
         public static final int aboutText=0x7f060041;
-        public static final int action_about=0x7f06004a;
-        public static final int action_back=0x7f060049;
+        public static final int action_about=0x7f060051;
+        public static final int action_back=0x7f060050;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1006,15 +1006,18 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f06004b;
+        public static final int action_settings=0x7f060052;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int always=0x7f06000b;
+        public static final int author=0x7f060042;
         public static final int beginning=0x7f060011;
-        public static final int btnNext=0x7f060044;
-        public static final int btnPlay=0x7f060043;
-        public static final int btnPrev=0x7f060042;
+        public static final int bottomLayout=0x7f060045;
+        public static final int btnNext=0x7f06004b;
+        public static final int btnPlay=0x7f06004a;
+        public static final int btnPrev=0x7f060049;
         public static final int checkbox=0x7f06002d;
         public static final int collapseActionView=0x7f06000d;
+        public static final int currentTime=0x7f060046;
         public static final int default_activity_button=0x7f060028;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
@@ -1024,6 +1027,8 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060026;
         public static final int expanded_menu=0x7f06002c;
         public static final int footer=0x7f06003e;
+        public static final int full=0x7f060043;
+        public static final int fullTime=0x7f060048;
         public static final int header=0x7f06003c;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
@@ -1049,6 +1054,7 @@ containing a value of this type.
         public static final int search_plate=0x7f060036;
         public static final int search_src_text=0x7f060037;
         public static final int search_voice_btn=0x7f06003b;
+        public static final int seekBar=0x7f060047;
         public static final int shortcut=0x7f06002e;
         public static final int showCustom=0x7f060007;
         public static final int showHome=0x7f060004;
@@ -1060,14 +1066,15 @@ containing a value of this type.
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
         public static final int trackInfo=0x7f06003d;
-        public static final int trackLength=0x7f060048;
-        public static final int trackName=0x7f060047;
-        public static final int trackNo=0x7f060046;
-        public static final int tracks=0x7f060045;
+        public static final int trackLength=0x7f06004f;
+        public static final int trackName=0x7f06004e;
+        public static final int trackNo=0x7f06004d;
+        public static final int tracks=0x7f06004c;
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
         public static final int withText=0x7f06000c;
         public static final int woombooLink=0x7f06003f;
+        public static final int year=0x7f060044;
     }
     public static final class integer {
         /**  The maximum number of action buttons that should be permitted within
